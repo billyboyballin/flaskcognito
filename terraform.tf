@@ -31,7 +31,7 @@ resource "aws_cognito_user_pool_client" "myclient" {
 }
 
 resource "aws_cognito_user_pool_domain" "main" {
-  domain       = "my-random-example-domain"
+  domain       = "bbb-random-example-domain"
   user_pool_id = aws_cognito_user_pool.mypool.id
 }
 
