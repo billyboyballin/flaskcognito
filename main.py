@@ -4,9 +4,9 @@ app = Flask(__name__)
 
 app.config['AWS_DEFAULT_REGION'] = 'us-east-1'
 app.config['AWS_COGNITO_DOMAIN'] = 'domain.com'
-app.config['AWS_COGNITO_USER_POOL_ID'] = 'eu-west-1_XXX'
-app.config['AWS_COGNITO_USER_POOL_CLIENT_ID'] = 'YYY'
-app.config['AWS_COGNITO_USER_POOL_CLIENT_SECRET'] = 'ZZZZ'
+app.config['AWS_COGNITO_USER_POOL_ID'] = 'INSERT_AWS_COGNITO_USER_POOL_ID'
+app.config['AWS_COGNITO_USER_POOL_CLIENT_ID'] = 'INSERT_AWS_COGNITO_USER_POOL_CLIENT_ID'
+app.config['AWS_COGNITO_USER_POOL_CLIENT_SECRET'] = 'INSERT_AWS_COGNITO_USER_POOL_CLIENT_SECRET'
 app.config['AWS_COGNITO_REDIRECT_URL'] = 'http://localhost:5000/aws_cognito_redirect'
 
 

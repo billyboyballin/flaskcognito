@@ -61,7 +61,7 @@ resource "aws_codebuild_project" "mycodebuildproject" {
 
     environment {
         compute_type                = "BUILD_GENERAL1_SMALL"
-        image                       = "aws/codebuild/standard:5.0"
+        image                       = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
         image_pull_credentials_type = "CODEBUILD"
         privileged_mode             = true
         type                        = "LINUX_CONTAINER"
@@ -80,7 +80,7 @@ resource "aws_codebuild_project" "mycodebuildproject" {
 
     source {
 		type            = "GITHUB"
-    	location        = "https://github.com/mitchellh/packer.git"
+    	location        = "https://github.com/billyboyballin/flaskcognito"
     	git_clone_depth = 1
     }
 }
