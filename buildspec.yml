@@ -1,15 +1,18 @@
 version: 0.2
 
 phases:
-  install:
+  pre_build:
     commands:
-      - aws --version
-      - docker --version
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - whoami && pwd && ls
-      - aws ec2 describe-addresses --filters "Name=tag-value,Values=CSG_BACKEND_EIP" | grep PublicIp | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"
-      - aws cognito-idp list-user-pools --max-results 10 --output text --query "UserPools[0].Id"
-      - aws cognito-idp list-user-pool-clients --user-pool-id $USER_POOL_ID --output text --query "UserPoolClients[0].ClientId"
-      - aws cognito-idp describe-user-pool-client --user-pool-id $USER_POOL_ID --client-id $CLIENT_ID --output text --query "UserPoolClient.ClientSecret"
-      - docker build --tag mycognitoflaskapp .
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG

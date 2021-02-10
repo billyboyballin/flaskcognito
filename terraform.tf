@@ -27,7 +27,7 @@ resource "aws_cognito_user_pool_client" "myclient" {
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_scopes = ["email", "openid"]
   supported_identity_providers = ["COGNITO"]
-  callback_urls = ["http://localhost:5000/aws_cognito_redirect"]
+  callback_urls = ["https://54.86.237.101:5000/aws_cognito_redirect"]
 }
 
 resource "aws_cognito_user_pool_domain" "main" {
