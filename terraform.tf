@@ -43,3 +43,44 @@ resource "aws_ecr_repository" "myecr" {
     scan_on_push = true
   }
 }
+
+
+resource "aws_codebuild_project" "mycodebuildproject" {
+    name           = "mycodebuildproject"
+    badge_enabled  = false
+    build_timeout  = 60
+    queued_timeout = 480
+    service_role   = "arn:aws:iam::159560289908:role/service-role/billyboyballin_codebuild_role"
+    tags           = {}
+
+    artifacts {
+        encryption_disabled    = false
+        override_artifact_name = false
+        type                   = "NO_ARTIFACTS"
+    }
+
+    environment {
+        compute_type                = "BUILD_GENERAL1_SMALL"
+        image                       = "aws/codebuild/standard:5.0"
+        image_pull_credentials_type = "CODEBUILD"
+        privileged_mode             = true
+        type                        = "LINUX_CONTAINER"
+    }
+
+    logs_config {
+        cloudwatch_logs {
+            status = "ENABLED"
+        }
+
+        s3_logs {
+            encryption_disabled = false
+            status              = "DISABLED"
+        }
+    }
+
+    source {
+		type            = "GITHUB"
+    	location        = "https://github.com/mitchellh/packer.git"
+    	git_clone_depth = 1
+    }
+}
