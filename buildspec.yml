@@ -3,9 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - apt update
       - aws --version
       - docker --version
   build:
     commands:
-       - apt update && whoami && pwd
+      - whoami && pwd
