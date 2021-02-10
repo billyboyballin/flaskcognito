@@ -7,4 +7,9 @@ phases:
       - docker --version
   build:
     commands:
-      - whoami && pwd
+      - whoami && pwd && ls
+      - aws ec2 describe-addresses --filters "Name=tag-value,Values=CSG_BACKEND_EIP" | grep PublicIp | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"
+      - aws cognito-idp list-user-pools --max-results 10 --output text --query "UserPools[0].Id"
+      - aws cognito-idp list-user-pool-clients --user-pool-id $USER_POOL_ID --output text --query "UserPoolClients[0].ClientId"
+      - aws cognito-idp describe-user-pool-client --user-pool-id $USER_POOL_ID --client-id $CLIENT_ID --output text --query "UserPoolClient.ClientSecret"
+      - docker build --tag mycognitoflaskapp .
