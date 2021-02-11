@@ -3,7 +3,7 @@ from flask_awscognito import AWSCognitoAuthentication
 app = Flask(__name__)
 
 app.config['AWS_DEFAULT_REGION'] = 'us-east-1'
-app.config['AWS_COGNITO_DOMAIN'] = 'domain.com'
+app.config['AWS_COGNITO_DOMAIN'] = 'bbb-random-example-domain.auth.us-east-1.amazoncognito.com'
 app.config['AWS_COGNITO_USER_POOL_ID'] = 'INSERT_AWS_COGNITO_USER_POOL_ID'
 app.config['AWS_COGNITO_USER_POOL_CLIENT_ID'] = 'INSERT_AWS_COGNITO_USER_POOL_CLIENT_ID'
 app.config['AWS_COGNITO_USER_POOL_CLIENT_SECRET'] = ''
