@@ -11,14 +11,14 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - USER_POOL_ID=$(aws cognito-idp list-user-pools --max-results 10 --output text --query "UserPools[0].Id" --region ${AWS_REGION})
-      - CLIENT_ID=$(aws cognito-idp list-user-pool-clients --user-pool-id $USER_POOL_ID --output text --query "UserPoolClients[0].ClientId" --region ${AWS_REGION})
-      - SECRET_ID=$(aws cognito-idp describe-user-pool-client --user-pool-id $USER_POOL_ID --client-id $CLIENT_ID --output text --query "UserPoolClient.ClientSecret" --region ${AWS_REGION})
+      - USER_POOL_ID=$(aws cognito-idp list-user-pools --max-results 10 --output text --query "UserPools[0].Id" --region us-east-1)
+      - CLIENT_ID=$(aws cognito-idp list-user-pool-clients --user-pool-id $USER_POOL_ID --output text --query "UserPoolClients[0].ClientId" --region us-east-1)
+      # - SECRET_ID=$(aws cognito-idp describe-user-pool-client --user-pool-id $USER_POOL_ID --client-id $CLIENT_ID --output text --query "UserPoolClient.ClientSecret" --region us-east-1)
       - sed -i "s/INSERT_AWS_COGNITO_USER_POOL_ID/$USER_POOL_ID/g" main.py
       - sed -i "s/INSERT_AWS_COGNITO_USER_POOL_CLIENT_ID/$CLIENT_ID/g" main.py
-      - sed -i "s/INSERT_AWS_COGNITO_USER_POOL_CLIENT_SECRET/$SECRET_ID/g" main.py
+      # - sed -i "s/INSERT_AWS_COGNITO_USER_POOL_CLIENT_SECRET/$SECRET_ID/g" main.py
       - cat main.py
-      # - docker build -t $AWS_DEFAULT_REGION.dkr.ecr.us-east-1.amazonaws.com/myecr:latest .
+      - docker build -t $AWS_DEFAULT_REGION.dkr.ecr.us-east-1.amazonaws.com/myecr:latest .
   post_build:
     commands:
       - echo Build completed on `date`

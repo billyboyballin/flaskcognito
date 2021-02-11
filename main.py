@@ -6,8 +6,8 @@ app.config['AWS_DEFAULT_REGION'] = 'us-east-1'
 app.config['AWS_COGNITO_DOMAIN'] = 'domain.com'
 app.config['AWS_COGNITO_USER_POOL_ID'] = 'INSERT_AWS_COGNITO_USER_POOL_ID'
 app.config['AWS_COGNITO_USER_POOL_CLIENT_ID'] = 'INSERT_AWS_COGNITO_USER_POOL_CLIENT_ID'
-app.config['AWS_COGNITO_USER_POOL_CLIENT_SECRET'] = 'INSERT_AWS_COGNITO_USER_POOL_CLIENT_SECRET'
-app.config['AWS_COGNITO_REDIRECT_URL'] = 'http://0.0.0.0:5000/aws_cognito_redirect'
+app.config['AWS_COGNITO_USER_POOL_CLIENT_SECRET'] = ''
+app.config['AWS_COGNITO_REDIRECT_URL'] = 'https://localhost:5000/aws_cognito_redirect'
 
 
 aws_auth = AWSCognitoAuthentication(app)
