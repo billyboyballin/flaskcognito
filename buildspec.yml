@@ -17,7 +17,8 @@ phases:
       - sed -i "s/INSERT_AWS_COGNITO_USER_POOL_CLIENT_ID/$CLIENT_ID/g" main.py
       # - sed -i "s/INSERT_AWS_COGNITO_USER_POOL_CLIENT_SECRET/$SECRET_ID/g" main.py
       - cat main.py
-      - docker build -t $AWS_DEFAULT_REGION.dkr.ecr.us-east-1.amazonaws.com/myecr:latest .
+      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myecr:latest .
   post_build:
     commands:
       - echo Build completed on `date`
