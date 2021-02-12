@@ -25,9 +25,10 @@ resource "aws_cognito_user_pool_client" "myclient" {
   user_pool_id                         = aws_cognito_user_pool.mypool.id
   allowed_oauth_flows                  = ["code"]
   allowed_oauth_flows_user_pool_client = true
+  generate_secret                      = true
   allowed_oauth_scopes                 = ["email", "openid"]
   supported_identity_providers         = ["COGNITO"]
-  callback_urls                        = ["https://54.86.237.101:5000/aws_cognito_redirect"]
+  callback_urls                        = ["https://insert-endpoint:5000/aws_cognito_redirect"]
 }
 
 resource "aws_cognito_user_pool_domain" "main" {
