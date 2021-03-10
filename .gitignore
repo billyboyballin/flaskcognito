@@ -1,4 +1,7 @@
+terraform/.terraform*
+venv
 terraform/.terraform/*
 terraform/*.tfstate
 terraform/terraform.tfstate.backup
 flasktest/__pycache__
+app/__pycache__

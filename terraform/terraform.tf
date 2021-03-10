@@ -36,6 +36,7 @@ resource "aws_cognito_user_pool_domain" "main" {
   user_pool_id = aws_cognito_user_pool.mypool.id
 }
 
+/*
 resource "aws_ecr_repository" "myecr" {
   name                 = "myecr"
   image_tag_mutability = "MUTABLE"
@@ -85,3 +86,4 @@ resource "aws_codebuild_project" "mycodebuildproject" {
     git_clone_depth = 1
   }
 }
+*/
